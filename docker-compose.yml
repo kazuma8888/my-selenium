@@ -1,19 +1,11 @@
-version: "3"
+version: '3'
+
 services:
   selenium:
-    image: selenium/standalone-firefox-debug:3.141.59
-    ports:
-      - 4444:4444
-      - 5900:5900
-    volumes:
-      - /dev/shm:/dev/shm
-  app:
-    build: .
-    environment:
-      # seleniumコンテナの4444ポートと接続
-      # wd/hubについてはわからない
-      SELENIUM_URL: http://selenium:4444/wd/hub 
+    container_name: selenium
+    build:
+      context: .
+      dockerfile: selenium.dockerfile
     tty: true
-    ports: 
-      # 80番portを外部に対して8000番portとして開く
-      - 8000:80 
+    #volumes:
+        #- ./:/app

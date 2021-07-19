@@ -1,11 +1,22 @@
-FROM python:3.8
-ENV PYTHONDONTWRITEBYTECODE 1
+FROM python:3.7-alpine
+
+ENV PYTHONIOENCODING utf-8
 ENV PYTHONUNBUFFERED 1
+WORKDIR /app
 
-RUN apt update -y
+RUN apk add --update \
+    wget \
+    # Add chromium and dependences
+    udev \
+    ttf-freefont \
+    chromium \
+    chromium-chromedriver \
+    gcc \
+    libc-dev \
+    libxml2-dev \
+    libxslt-dev
 
-RUN mkdir -p /var/www
-COPY . /var/www
-RUN pip install -r /var/www/requirements.txt
+COPY ./requirements.txt /app/
+RUN pip3 install -r requirements.txt
 
-WORKDIR /var/www
+COPY . /app/

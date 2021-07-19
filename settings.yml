@@ -1,0 +1,3 @@
+chromedriver_path : '/usr/lib/chromium/chromedriver'
+remote_selenium: False
+headless: True
